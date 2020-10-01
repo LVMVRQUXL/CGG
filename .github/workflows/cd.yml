@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build Android application
-        run: gradlew clean build
+        run: ./gradlew clean build
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
