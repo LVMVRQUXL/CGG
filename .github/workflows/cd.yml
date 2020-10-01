@@ -34,7 +34,7 @@ jobs:
           git config user.name "$GIT_USER_NAME"
       - name: Tag version
         run: |
-          version=`cat ./VERSION`
+          version=`cat ./resources/VERSION`
           git tag -a "v$version" -m "Release version $version"
       - name: Push tag to Github
         run: git push --tags origin
