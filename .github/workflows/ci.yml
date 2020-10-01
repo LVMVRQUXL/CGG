@@ -13,5 +13,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Make Gradle executable
+        run: git update-index --chmod=+x ./gradlew
       - name: Build Android application
         run: ./gradlew clean build
