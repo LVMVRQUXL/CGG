@@ -1,3 +1,6 @@
 <resources>
+    <string name="app_full_name">Color Guessing Game</string>
     <string name="app_name">CGG</string>
+    <string name="button_colors">COLORS</string>
+    <string name="button_play">PLAY</string>
 </resources>
