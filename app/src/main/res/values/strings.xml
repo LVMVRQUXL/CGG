@@ -4,6 +4,6 @@
     <string name="button_colors">COLORS</string>
     <string name="button_play">PLAY</string>
     <string name="button_default">Default</string>
-    <string name="question">What\'s the background color ?</string>
+    <string name="question">What color is this?</string>
     <string name="round">Round ?/?</string>
 </resources>
