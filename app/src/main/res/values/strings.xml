@@ -6,4 +6,7 @@
     <string name="button_default">Default</string>
     <string name="question">What color is this?</string>
     <string name="round">Round ?/?</string>
+    <string name="scoreText">Score</string>
+    <string name="scoreResult">0/10</string>
+    <string name="button_home">HOME</string>
 </resources>
