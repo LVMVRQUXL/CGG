@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:id="@+id/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        android:id="@+id/middleUp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"
+        android:id="@+id/middleDown" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        android:id="@+id/up" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"
+        android:id="@+id/down" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:background="@drawable/rounded_corners_primary"
+        app:layout_constraintTop_toBottomOf="@id/middleUp"
+        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:background="@drawable/rounded_corners_primary"
+        app:layout_constraintTop_toBottomOf="@id/middleUp"
+        app:layout_constraintBottom_toTopOf="@id/button4"
+        app:layout_constraintStart_toEndOf="@id/button"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:background="@drawable/rounded_corners_primary"
+        app:layout_constraintTop_toBottomOf="@id/button"
+        app:layout_constraintBottom_toTopOf="@id/middleDown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button4" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:background="@drawable/rounded_corners_primary"
+        app:layout_constraintTop_toBottomOf="@id/button2"
+        app:layout_constraintBottom_toTopOf="@id/middleDown"
+        app:layout_constraintStart_toEndOf="@id/button3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_full_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/up"
+
+     />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/middleUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/round"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/down"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
