@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_result.*
 class ResultActivity : AppCompatActivity() {
 
     companion object {
-        val SCORE_KEY = "scoreKey"
+        const val SCORE_KEY = "scoreKey"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +29,5 @@ class ResultActivity : AppCompatActivity() {
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
         }
-
     }
-
-
 }
