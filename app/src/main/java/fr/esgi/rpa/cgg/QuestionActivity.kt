@@ -3,14 +3,14 @@ package fr.esgi.rpa.cgg
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.question_page.*
+import kotlinx.android.synthetic.main.activity_question.*
 
 
 class QuestionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.question_page)
+        setContentView(R.layout.activity_question)
 
         button1?.setOnClickListener { buttonClicked() }
         button2?.setOnClickListener { buttonClicked() }
