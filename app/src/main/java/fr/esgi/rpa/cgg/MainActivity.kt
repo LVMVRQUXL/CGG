@@ -7,7 +7,6 @@ import fr.esgi.rpa.cgg.color.ColorsActivity
 import fr.esgi.rpa.cgg.question.QuestionActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-// TODO: refactor navigation
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,6 +2,7 @@ package fr.esgi.rpa.cgg.color
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,12 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import kotlinx.android.synthetic.main.activity_colors.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class ColorsActivity : AppCompatActivity() {
-    private val colors: MutableList<Color> = mutableListOf()
-    private val colorsAdapter: ColorsAdapter =
-        ColorsAdapter(colors) { color: Int -> this.updateBackgroundWithTimer(color) }
+    private var colors: MutableList<Color> = mutableListOf()
+    private var colorsAdapter: ColorsAdapter =
+        ColorsAdapter(colors) { color: Int -> updateBackgroundWithTimer(color) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +35,17 @@ class ColorsActivity : AppCompatActivity() {
 
     private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.colorPrimaryDark)
 
-    // TODO: remove with API calls
     private fun initColors() {
-        for (i in 1..10) {
-            val red = Color("red", "#e74c3c", "#c0392b")
-            val yellow = Color("yellow", "#F1C40F", "#f0ac00")
-            this.colors.add(red)
-            this.colors.add(yellow)
-        }
+        ColorsRepository.getAllColors(object : Callback<List<Color>> {
+            override fun onResponse(call: Call<List<Color>>, response: Response<List<Color>>) {
+                response.body()?.forEach { color: Color -> colors.add(color) }
+                colorsAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<List<Color>>, t: Throwable) {
+                Log.e("ColorsActivity", "An error has occurred", t)
+            }
+        })
     }
 
     private fun setClickListeners(): Unit? = home_button?.setOnClickListener {
