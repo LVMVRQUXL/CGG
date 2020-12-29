@@ -23,7 +23,7 @@ class ResultActivity : AppCompatActivity() {
             scoreResult?.text = it + "/10"
         }
 
-        home_button?.setOnClickListener {
+        back_button?.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

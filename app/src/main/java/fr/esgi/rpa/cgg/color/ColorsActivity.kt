@@ -48,7 +48,7 @@ class ColorsActivity : AppCompatActivity() {
         })
     }
 
-    private fun setClickListeners(): Unit? = home_button?.setOnClickListener {
+    private fun setClickListeners(): Unit? = back_button?.setOnClickListener {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
@@ -56,6 +56,7 @@ class ColorsActivity : AppCompatActivity() {
     private fun updateBackground(backgroundColor: Int) {
         this.colorsAdapter.updateIsClickable()
         colors_activity?.setBackgroundColor(backgroundColor)
+        window.statusBarColor = backgroundColor
     }
 
     private fun updateBackgroundWithTimer(backgroundColor: Int) {
