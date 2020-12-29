@@ -37,7 +37,7 @@
         android:id="@+id/down" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_default"
@@ -60,7 +60,7 @@
         android:background="@drawable/rounded_corners_primary"
         app:layout_constraintTop_toBottomOf="@id/middleUp"
         app:layout_constraintBottom_toTopOf="@id/button4"
-        app:layout_constraintStart_toEndOf="@id/button"
+        app:layout_constraintStart_toEndOf="@id/button1"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -71,7 +71,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
         android:background="@drawable/rounded_corners_primary"
-        app:layout_constraintTop_toBottomOf="@id/button"
+        app:layout_constraintTop_toBottomOf="@id/button1"
         app:layout_constraintBottom_toTopOf="@id/middleDown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button4" />
