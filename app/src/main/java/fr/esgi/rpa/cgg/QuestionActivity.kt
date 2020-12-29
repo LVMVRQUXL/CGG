@@ -1,9 +1,8 @@
 package fr.esgi.rpa.cgg
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.question_page.*
 
 
@@ -19,7 +18,7 @@ class QuestionActivity : AppCompatActivity() {
         button4?.setOnClickListener { buttonClicked() }
     }
 
-    fun buttonClicked() {
+    private fun buttonClicked() {
         val intent = Intent(this, ResultActivity::class.java)
         startActivity(intent)
     }

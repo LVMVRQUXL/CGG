@@ -1,129 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:id="@+id/background"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    android:background="@color/colorPrimaryDark">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"
-        android:id="@+id/middleUp" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleUpGuideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7"
-        android:id="@+id/middleDown" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleDownGuideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"
-        android:id="@+id/up" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9"
-        android:id="@+id/down" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:background="@drawable/rounded_corners_primary"
-        app:layout_constraintTop_toBottomOf="@id/middleUp"
-        app:layout_constraintBottom_toTopOf="@id/button3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button2"
-        />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:background="@drawable/rounded_corners_primary"
-        app:layout_constraintTop_toBottomOf="@id/middleUp"
-        app:layout_constraintBottom_toTopOf="@id/button4"
-        app:layout_constraintStart_toEndOf="@id/button1"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:background="@drawable/rounded_corners_primary"
-        app:layout_constraintTop_toBottomOf="@id/button1"
-        app:layout_constraintBottom_toTopOf="@id/middleDown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button4" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:background="@drawable/rounded_corners_primary"
-        app:layout_constraintTop_toBottomOf="@id/button2"
-        app:layout_constraintBottom_toTopOf="@id/middleDown"
-        app:layout_constraintStart_toEndOf="@id/button3"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <TextView
         android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_full_name"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
-         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/topGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/up"
-
-     />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question"
-        android:textSize="24sp"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@id/middleUp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/middleUpGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primary"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/middleUpGuideline" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primary"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintTop_toBottomOf="@id/middleUpGuideline" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primary"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/middleDownGuideline"
+        app:layout_constraintEnd_toStartOf="@id/button4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button1" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primary"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/middleDownGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button3"
+        app:layout_constraintTop_toBottomOf="@id/button2" />
 
     <TextView
         android:id="@+id/round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/round"
-        android:textSize="24sp"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/down"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottomGuideline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
