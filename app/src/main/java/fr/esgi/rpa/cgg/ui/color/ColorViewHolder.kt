@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.data.Color
 
-private const val ATTACH_TO_ROOT = false
-
-class ColorViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.color_item, parent, ATTACH_TO_ROOT)) {
+class ColorViewHolder(inflater: LayoutInflater, parent: ViewGroup, attachToRoot: Boolean = false) :
+    RecyclerView.ViewHolder(inflater.inflate(R.layout.color_item, parent, attachToRoot)) {
     private var colorName: TextView? = null
     private var darkButton: Button? = null
     private var darkColor: String = ""
