@@ -1,4 +1,4 @@
-package fr.esgi.rpa.cgg.core
+package fr.esgi.rpa.cgg.color
 
 import android.os.CountDownTimer
 

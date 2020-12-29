@@ -1,8 +1,11 @@
-package fr.esgi.rpa.cgg
+package fr.esgi.rpa.cgg.result
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import fr.esgi.rpa.cgg.MainActivity
+import fr.esgi.rpa.cgg.R
+import fr.esgi.rpa.cgg.question.QuestionActivity
 import kotlinx.android.synthetic.main.activity_result.*
 
 

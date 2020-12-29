@@ -1,4 +1,4 @@
-package fr.esgi.rpa.cgg.ui.color
+package fr.esgi.rpa.cgg.color
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
-import fr.esgi.rpa.cgg.core.ColorTimer
-import fr.esgi.rpa.cgg.data.Color
 import kotlinx.android.synthetic.main.activity_colors.*
 import java.util.*
 

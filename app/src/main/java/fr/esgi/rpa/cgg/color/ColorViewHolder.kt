@@ -1,4 +1,4 @@
-package fr.esgi.rpa.cgg.ui.color
+package fr.esgi.rpa.cgg.color
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.esgi.rpa.cgg.R
-import fr.esgi.rpa.cgg.data.Color
 
 class ColorViewHolder(inflater: LayoutInflater, parent: ViewGroup, attachToRoot: Boolean = false) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.color_item, parent, attachToRoot)) {

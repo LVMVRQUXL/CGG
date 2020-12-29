@@ -1,9 +1,8 @@
-package fr.esgi.rpa.cgg.ui.color
+package fr.esgi.rpa.cgg.color
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import fr.esgi.rpa.cgg.data.Color
 
 class ColorsAdapter(
     private val colors: List<Color>,
