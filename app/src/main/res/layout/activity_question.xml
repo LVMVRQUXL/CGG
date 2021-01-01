@@ -116,13 +116,47 @@
         android:id="@+id/round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/round"
+        android:text="@string/button_default"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/slash"
         app:layout_constraintTop_toTopOf="@id/bottomGuideline" />
+
+    <Button
+        android:id="@+id/next_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_primary"
+        android:text="@string/next"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/middleDown" />
+
+    <TextView
+        android:id="@+id/currentRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_default"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/down"
+        app:layout_constraintEnd_toStartOf="@id/slash"
+        app:layout_constraintStart_toEndOf="@id/roundText" />
+
+    <TextView
+        android:id="@+id/slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slash"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/down"
+        app:layout_constraintEnd_toStartOf="@id/round"
+        app:layout_constraintStart_toEndOf="@id/currentRound" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
