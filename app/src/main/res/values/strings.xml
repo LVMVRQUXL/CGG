@@ -17,4 +17,11 @@
     <string name="slash">/</string>
     <string name="x">X</string>
     <string name="result">Result</string>
+    <string name="button_options">OPTIONS</string>
+    <string name="button_confirm">CONFIRM</string>
+    <string name="difficultyText">Select difficulty level</string>
+    <string name="button_easy">EASY</string>
+    <string name="button_medium">MEDIUM</string>
+    <string name="button_hard">HARD</string>
+    <string name="optionPreference">Option Preferences</string>
 </resources>

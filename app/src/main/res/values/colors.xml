@@ -6,4 +6,6 @@
     <color name="redDarkColor">#c0392b</color>
     <color name="yellowLightColor">#F1C40F</color>
     <color name="yellowDarkColor">#f0ac00</color>
+    <color name="greenColor">#00FF00</color>
+    <color name="redColor">#c0392b</color>
 </resources>
