@@ -5,7 +5,7 @@
     <string name="button_play">PLAY</string>
     <string name="button_default">Default</string>
     <string name="question">What color is this?</string>
-    <string name="round">Round  </string>
+    <string name="round">Round</string>
     <string name="scoreText">Score</string>
     <string name="scoreResult">0/10</string>
     <string name="button_home">HOME</string>
@@ -15,4 +15,6 @@
     <string name="darkColorButton">dark</string>
     <string name="next">Next</string>
     <string name="slash">/</string>
+    <string name="x">X</string>
+    <string name="result">Result</string>
 </resources>
