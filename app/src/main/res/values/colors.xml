@@ -2,6 +2,10 @@
 <resources>
     <color name="colorPrimary">#ECF0F1</color>
     <color name="colorPrimaryDark">#2C3E50</color>
-    <color name="colorQuizExampleDark">#E74C3C</color>
-    <color name="colorQuizExampleLight">#F1C40F</color>
+    <color name="redLightColor">#E74C3C</color>
+    <color name="redDarkColor">#c0392b</color>
+    <color name="yellowLightColor">#F1C40F</color>
+    <color name="yellowDarkColor">#f0ac00</color>
+    <color name="greenColor">#00FF00</color>
+    <color name="redColor">#c0392b</color>
 </resources>
