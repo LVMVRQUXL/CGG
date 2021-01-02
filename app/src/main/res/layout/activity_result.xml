@@ -6,21 +6,21 @@
     android:background="@color/colorPrimaryDark">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
+        android:id="@+id/top_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/middleDownGuideline"
+        android:id="@+id/middle_down_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
+        android:id="@+id/bottom_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -35,7 +35,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/topGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/top_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toTopOf="@id/scoreResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topGuideline"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/middleDownGuideline"
+        app:layout_constraintBottom_toTopOf="@id/middle_down_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scoreText" />
@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toTopOf="@id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/middleDownGuideline"
+        app:layout_constraintTop_toBottomOf="@id/middle_down_guideline"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
@@ -95,7 +95,7 @@
         android:text="@string/button_home"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/play_button" />
