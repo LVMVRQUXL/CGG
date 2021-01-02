@@ -9,4 +9,8 @@
     <string name="scoreText">Score</string>
     <string name="scoreResult">0/10</string>
     <string name="button_home">HOME</string>
+    <string name="backButton">back</string>
+    <string name="colorName">color</string>
+    <string name="lightColorButton">light</string>
+    <string name="darkColorButton">dark</string>
 </resources>
