@@ -13,11 +13,6 @@ object ButtonUtils {
     private const val PRIMARY_COLOR: Int = R.color.primary
     private const val PRIMARY_DARK_COLOR: Int = R.color.primaryDark
 
-    fun clickable(button: Button?) {
-        button?.isClickable = true
-        button?.isEnabled = true
-    }
-
     fun focus(button: Button?) = button?.setBackgroundResource(FOCUS_BACKGROUND)
 
     fun goodAnswer(button: Button?, context: Context) {
@@ -35,16 +30,22 @@ object ButtonUtils {
     }
 
     fun reset(button: Button?, context: Context) {
+        this.clickable(button)
         button?.setBackgroundResource(DEFAULT_BACKGROUND)
         this.textColor(button, PRIMARY_DARK_COLOR, context)
     }
 
-    fun text(button: Button?, text: String) {
+    fun text(button: Button?, text: String?) {
         button?.text = text
     }
 
     fun visible(button: Button?) {
         button?.isInvisible = false
+    }
+
+    private fun clickable(button: Button?) {
+        button?.isClickable = true
+        button?.isEnabled = true
     }
 
     private fun textColor(button: Button?, color: Int, context: Context) =

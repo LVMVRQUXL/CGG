@@ -1,25 +1,21 @@
 package fr.esgi.rpa.cgg.quiz
 
 import android.content.Context
-import android.util.Log
 import fr.esgi.rpa.cgg.color.*
 import fr.esgi.rpa.cgg.difficulty.DifficultyPreferences
 
-class QuizManager(private val context: Context) {
-    companion object {
-        private const val TAG: String = "QuizManager"
-    }
-
+class QuizManager(private val context: Context, private val callbackUI: () -> Unit) {
     private val questions: MutableList<Question> = mutableListOf()
     private val randomColors: MutableList<SingleColor> = mutableListOf()
+    private val roundsNumber: Int = DifficultyPreferences(this.context).roundsNumber()
     private var currentQuestion: Question? = null
-    private var currentRound: Int = 1
-    private var roundsNumber: Int = -1
+    private var currentRound: Int = 0
 
     init {
-        this.initRoundsNumber()
         this.initRandomColors()
     }
+
+    fun getCurrentQuestion(): Question? = this.currentQuestion
 
     fun getCurrentRound(): Int = this.currentRound
 
@@ -27,10 +23,9 @@ class QuizManager(private val context: Context) {
 
     fun isLastRound(): Boolean = this.roundsNumber == this.currentRound
 
-    fun nextRound(nextActivity: () -> Unit) {
-        this.currentRound++
-        if (this.roundsNumber < this.currentRound) nextActivity()
-        else this.nextQuestion()
+    fun nextRound(nextActivity: () -> Unit) = when (this.roundsNumber) {
+        this.currentRound -> nextActivity()
+        else -> this.nextQuestion()
     }
 
     private fun buildQuestion(): Question {
@@ -43,9 +38,11 @@ class QuizManager(private val context: Context) {
         return Question(answer, suggestionColors)
     }
 
-    private fun continueInit() {
+    private fun continueInit(colors: List<Color>) {
+        this.pickRandomColors(colors)
         this.initQuestions()
         this.nextQuestion()
+        this.callbackUI()
     }
 
     private fun initQuestions() {
@@ -57,20 +54,12 @@ class QuizManager(private val context: Context) {
 
     private fun initRandomColors() {
         val colors: MutableList<Color> = mutableListOf()
-        val callback = GetColorsCallback(colors) {
-            pickRandomColors(colors)
-            this.continueInit()
-        }
+        val callback = GetColorsCallback(colors) { this.continueInit(colors) }
         ColorsRepository.getColors(callback)
     }
 
-    private fun initRoundsNumber() {
-        this.roundsNumber = DifficultyPreferences(this.context).roundsNumber()
-    }
-
     private fun nextQuestion() {
-        this.currentQuestion = this.questions[this.currentRound - 1]
-        Log.v(TAG, "${this.currentQuestion}")
+        this.currentQuestion = this.questions[this.currentRound++]
     }
 
     private fun pickRandomColors(colors: List<Color>) {

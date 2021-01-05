@@ -1,33 +1,55 @@
 package fr.esgi.rpa.cgg.quiz
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import fr.esgi.rpa.cgg.R
+import fr.esgi.rpa.cgg.color.SingleColor
 import fr.esgi.rpa.cgg.result.ResultActivity
 import fr.esgi.rpa.cgg.utils.ButtonUtils
 import kotlinx.android.synthetic.main.activity_quiz.*
 
 class QuizActivity : AppCompatActivity() {
+    companion object {
+        private const val RESULT_STRING: Int = R.string.result
+        private const val VIEW: Int = R.layout.activity_quiz
+    }
+
     private val suggestionButtons: MutableList<Button?> = mutableListOf()
     private var answerButton: Button? = null
     private var quizManager: QuizManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        super.setContentView(R.layout.activity_quiz)
         this.initQuizManager()
-        this.initSuggestionButtons()
+    }
+
+    private fun continueOnCreate() {
+        super.setContentView(VIEW)
+        this.initButtons()
         this.initCounters()
-
-        answerButton = button1 // TODO: replace with real answer
-
         this.setOnClickListeners()
     }
 
+    private fun disableSuggestionButtons() =
+        this.suggestionButtons.forEach { button: Button? -> ButtonUtils.notClickable(button) }
+
     private fun goToResultActivity() =
         super.startActivity(Intent(this, ResultActivity::class.java))
+
+    private fun initAnswerButton() {
+        val answer: SingleColor? = this.quizManager?.getCurrentQuestion()?.getAnswer()
+        this.answerButton =
+            this.suggestionButtons.first { button: Button? -> answer?.getName() == button?.text }
+    }
+
+    private fun initButtons() {
+        this.initSuggestionButtons()
+        this.initAnswerButton()
+        this.updateBackgroundColor()
+    }
 
     private fun initCounters() {
         this.updateCurrentRoundText()
@@ -35,26 +57,30 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun initQuizManager() {
-        this.quizManager = QuizManager(this)
+        this.quizManager = QuizManager(this) { this.continueOnCreate() }
     }
 
     private fun initSuggestionButtons() {
-        this.suggestionButtons.add(button1)
-        this.suggestionButtons.add(button2)
-        this.suggestionButtons.add(button3)
-        this.suggestionButtons.add(button4)
+        val colors: List<SingleColor>? =
+            this.quizManager?.getCurrentQuestion()?.getSuggestionColors()?.getColors()
+        val buttons = listOf<Button?>(button1, button2, button3, button4)
+        buttons.forEachIndexed { index: Int, button: Button? ->
+            val colorName = colors?.get(index)?.getName()
+            ButtonUtils.text(button, colorName)
+            this.suggestionButtons.add(button)
+        }
     }
 
     private fun nextRound() {
         this.updateCurrentRoundText()
         this.resetSuggestionButtons()
         if (true == this.quizManager?.isLastRound())
-            ButtonUtils.text(next_button, getString(R.string.result))
+            ButtonUtils.text(next_button, super.getString(RESULT_STRING))
         ButtonUtils.invisible(next_button)
+        this.initButtons()
     }
 
-    private fun resetSuggestionButtons() = this.suggestionButtons.forEach { button ->
-        ButtonUtils.clickable(button)
+    private fun resetSuggestionButtons() = this.suggestionButtons.forEach { button: Button? ->
         ButtonUtils.reset(button, this)
     }
 
@@ -70,14 +96,21 @@ class QuizActivity : AppCompatActivity() {
         this.setSuggestionButtonsClickListener()
     }
 
-    private fun setSuggestionButtonsClickListener() = this.suggestionButtons.forEach { suggestion ->
-        suggestion?.setOnClickListener { clickedButton ->
+    private fun setSuggestionButtonsClickListener() = this.suggestionButtons.forEach { b: Button? ->
+        b?.setOnClickListener { clickedButton ->
             val button = clickedButton as Button
             ButtonUtils.focus(button)
+            this.disableSuggestionButtons()
             this.revealAnswer()
-            ButtonUtils.notClickable(button)
             ButtonUtils.visible(next_button)
         }
+    }
+
+    private fun updateBackgroundColor() {
+        val colorValue: String? = this.quizManager?.getCurrentQuestion()?.getAnswer()?.getValue()
+        val color = Color.parseColor(colorValue)
+        background?.setBackgroundColor(color)
+        window.statusBarColor = color
     }
 
     private fun updateCurrentRoundText() {

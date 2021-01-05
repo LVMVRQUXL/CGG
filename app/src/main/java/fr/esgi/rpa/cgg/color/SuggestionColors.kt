@@ -15,10 +15,13 @@ class SuggestionColors {
         else -> this.colors.add(color)
     }
 
-    fun contains(color: SingleColor): Boolean = this.colors.contains(color)
+    fun contains(color: SingleColor): Boolean =
+        this.colors.contains(color) || this.containsColorName(color.getName())
 
     override fun equals(other: Any?): Boolean =
-        other is SuggestionColors && this.colors.hashCode() == other.colors.hashCode()
+        other is SuggestionColors && this.colors == other.colors
+
+    fun getColors(): List<SingleColor> = this.colors
 
     fun getRandomColor(): SingleColor = this.colors.random()
 
@@ -27,4 +30,10 @@ class SuggestionColors {
     fun isFull(): Boolean = COLORS_LIMIT == this.colors.size
 
     override fun toString(): String = "SuggestionColors(colors=${this.colors})"
+
+    private fun containsColorName(colorName: String): Boolean {
+        for (color in this.colors)
+            if (colorName == color.getName()) return true
+        return false
+    }
 }
