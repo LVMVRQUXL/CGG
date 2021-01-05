@@ -1,6 +1,5 @@
 package fr.esgi.rpa.cgg.color
 
-import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,8 +14,5 @@ object ColorsRepository {
             .create(ColorsApiService::class.java)
     }
 
-    fun getAllColors(callback: Callback<List<Color>>) {
-        val call = this.apiService?.getAllColors()
-        call?.enqueue(callback)
-    }
+    fun getColors(callback: GetColorsCallback) = this.apiService?.getAllColors()?.enqueue(callback)
 }
