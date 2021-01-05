@@ -24,7 +24,7 @@ class ColorsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_colors)
         this.initColors()
         this.applyRecyclerView()
-        this.setClickListeners()
+        this.setBackButtonClickListener()
     }
 
     private fun applyRecyclerView(): RecyclerView? = colors_recycler_view?.apply {
@@ -34,22 +34,20 @@ class ColorsActivity : AppCompatActivity() {
 
     private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.colorPrimaryDark)
 
-    private fun initColors() {
-        ColorsRepository.getAllColors(object : Callback<List<Color>> {
-            override fun onResponse(call: Call<List<Color>>, response: Response<List<Color>>) {
-                response.body()?.forEach { color: Color -> colors.add(color) }
-                colorsAdapter.notifyDataSetChanged()
-            }
+    private fun initColors() = ColorsRepository.getAllColors(object : Callback<List<Color>> {
+        override fun onResponse(call: Call<List<Color>>, response: Response<List<Color>>) {
+            response.body()?.forEach { color: Color -> colors.add(color) }
+            colorsAdapter.notifyDataSetChanged()
+        }
 
-            override fun onFailure(call: Call<List<Color>>, t: Throwable) {
-                Log.e("ColorsActivity", "An error has occurred", t)
-            }
-        })
-    }
+        override fun onFailure(call: Call<List<Color>>, t: Throwable) {
+            Log.e("ColorsActivity", "An error has occurred", t)
+        }
+    })
 
-    private fun setClickListeners(): Unit? = back_button?.setOnClickListener {
+    private fun setBackButtonClickListener() = back_button?.setOnClickListener {
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        navigateUpTo(intent)
     }
 
     private fun updateBackground(backgroundColor: Int) {
