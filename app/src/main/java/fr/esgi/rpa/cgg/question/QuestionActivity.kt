@@ -1,15 +1,13 @@
 package fr.esgi.rpa.cgg.question
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.difficulty.DifficultyPreferences
 import fr.esgi.rpa.cgg.result.ResultActivity
+import fr.esgi.rpa.cgg.utils.ButtonUtils
 import kotlinx.android.synthetic.main.activity_question.*
 
 class QuestionActivity : AppCompatActivity() {
@@ -34,9 +32,8 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun checkUserAnswer(userAnswer: Button) {
-        if (this.answerButton?.id != userAnswer.id) userAnswer.setTextColor(Color.RED)
+        if (this.answerButton?.id != userAnswer.id) ButtonUtils.focus(userAnswer)
         else this.score++
-        this.revealAnswer()
     }
 
     private fun goToResultActivity() =
@@ -61,18 +58,17 @@ class QuestionActivity : AppCompatActivity() {
     private fun nextRound() {
         this.updateCurrentRoundText()
         this.resetSuggestionButtons()
-        this.updateNextButton(true)
+        if (this.roundsNumber == this.currentRound)
+            ButtonUtils.text(next_button, getString(R.string.result))
+        ButtonUtils.invisible(next_button)
     }
 
     private fun resetSuggestionButtons() = this.suggestionButtons.forEach { button ->
-        this.updateSuggestionButtonsClickable(button, true)
-        val color = ContextCompat.getColor(this, R.color.colorPrimaryDark)
-        button?.setTextColor(color)
+        ButtonUtils.clickable(button)
+        ButtonUtils.reset(button, this)
     }
 
-    private fun revealAnswer() =
-        this.suggestionButtons.first { button -> this.answerButton?.id == button?.id }
-            ?.setTextColor(Color.GREEN)
+    private fun revealAnswer() = ButtonUtils.goodAnswer(this.answerButton, this)
 
     private fun setNextButtonClickListener() = next_button?.setOnClickListener {
         this.currentRound++
@@ -89,22 +85,13 @@ class QuestionActivity : AppCompatActivity() {
         suggestion?.setOnClickListener { clickedButton ->
             val button = clickedButton as Button
             this.checkUserAnswer(button)
-            this.updateSuggestionButtonsClickable(button, false)
-            this.updateNextButton(false)
+            this.revealAnswer()
+            ButtonUtils.notClickable(button)
+            ButtonUtils.visible(next_button)
         }
     }
 
     private fun updateCurrentRoundText() {
         current_round?.text = this.currentRound.toString()
-    }
-
-    private fun updateNextButton(isInvisible: Boolean) {
-        if (this.roundsNumber == this.currentRound) next_button?.text = getString(R.string.result)
-        next_button?.isInvisible = isInvisible
-    }
-
-    private fun updateSuggestionButtonsClickable(button: Button?, isClickable: Boolean) {
-        button?.isClickable = isClickable
-        button?.isEnabled = isClickable
     }
 }

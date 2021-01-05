@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
+import fr.esgi.rpa.cgg.utils.ButtonUtils
 import kotlinx.android.synthetic.main.activity_difficulty.*
 
 class DifficultyActivity : AppCompatActivity() {
@@ -20,9 +21,6 @@ class DifficultyActivity : AppCompatActivity() {
         this.focusButtonFromPreferences()
         this.setClickListeners()
     }
-
-    private fun focusButton(button: Button?) =
-        button?.setBackgroundResource(R.drawable.rounded_corners_complementary)
 
     private fun focusButtonFromPreferences() {
         val buttonId: Int? = this.getButtonIdFromPreferences()
@@ -45,12 +43,9 @@ class DifficultyActivity : AppCompatActivity() {
         this.preferences = DifficultyPreferences(this)
     }
 
-    private fun resetButtonState(button: Button?) =
-        button?.setBackgroundResource(R.drawable.rounded_corners_primary)
-
-    private fun setBackButtonClickListener() = back_button?.setOnClickListener {
-        val intent = Intent(this, MainActivity::class.java)
-        super.navigateUpTo(intent)
+    private fun setBackButtonClickListener() = back_button?.setOnClickListener { button ->
+        ButtonUtils.focus(button as Button)
+        super.navigateUpTo(Intent(this, MainActivity::class.java))
     }
 
     private fun setClickListeners() {
@@ -69,8 +64,8 @@ class DifficultyActivity : AppCompatActivity() {
     }
 
     private fun updateFocusedButton(buttonId: Int?) = this.buttons.forEach { button ->
-        if (buttonId == button?.id) this.focusButton(button)
-        else this.resetButtonState(button)
+        if (buttonId == button?.id) ButtonUtils.focus(button)
+        else ButtonUtils.reset(button, this)
     }
 
     private fun updateFocusedButtonAndPreferences(buttonId: Int) {

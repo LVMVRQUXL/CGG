@@ -28,7 +28,7 @@ class ColorsActivity : AppCompatActivity() {
         adapter = colorsAdapter
     }
 
-    private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+    private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.primaryDark)
 
     private fun initColors() {
         val callback = GetColorsCallback(this.colors) { this.colorsAdapter.notifyDataSetChanged() }

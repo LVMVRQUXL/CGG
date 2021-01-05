@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ECF0F1</color>
-    <color name="colorPrimaryDark">#2C3E50</color>
-    <color name="pressedDarkColor">#b3a89e</color>
-    <color name="redLightColor">#E74C3C</color>
-    <color name="redDarkColor">#c0392b</color>
-    <color name="yellowLightColor">#F1C40F</color>
-    <color name="yellowDarkColor">#f0ac00</color>
-    <color name="greenColor">#00FF00</color>
-    <color name="redColor">#c0392b</color>
+    <color name="primary">#ECF0F1</color>
+    <color name="primaryDark">#2C3E50</color>
+    <color name="focus">#b3a89e</color>
+    <color name="green">#006700</color>
+    <color name="red">#c0392b</color>
 </resources>
