@@ -8,7 +8,7 @@ object ColorsRepository {
 
     init {
         this.apiService = Retrofit.Builder()
-            .baseUrl("http://www.json-generator.com/api/")
+            .baseUrl(ColorsApiService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ColorsApiService::class.java)
