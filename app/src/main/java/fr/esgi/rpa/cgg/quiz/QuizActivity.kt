@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import fr.esgi.rpa.cgg.R
-import fr.esgi.rpa.cgg.difficulty.DifficultyPreferences
 import fr.esgi.rpa.cgg.result.ResultActivity
 import fr.esgi.rpa.cgg.utils.ButtonUtils
 import kotlinx.android.synthetic.main.activity_quiz.*
@@ -13,27 +12,18 @@ import kotlinx.android.synthetic.main.activity_quiz.*
 class QuizActivity : AppCompatActivity() {
     private val suggestionButtons: MutableList<Button?> = mutableListOf()
     private var answerButton: Button? = null
-    private var currentRound: Int = 1
-    private var roundsNumber: Int = -1
-    private var score = 0
+    private var quizManager: QuizManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         super.setContentView(R.layout.activity_quiz)
-        this.initRoundsNumber()
+        this.initQuizManager()
         this.initSuggestionButtons()
         this.initCounters()
 
-        // TODO: get colors from API
-        // TODO: get number of random colors equals to this.roundsNumber
         answerButton = button1 // TODO: replace with real answer
 
         this.setOnClickListeners()
-    }
-
-    private fun checkUserAnswer(userAnswer: Button) {
-        if (this.answerButton?.id != userAnswer.id) ButtonUtils.focus(userAnswer)
-        else this.score++
     }
 
     private fun goToResultActivity() =
@@ -41,11 +31,11 @@ class QuizActivity : AppCompatActivity() {
 
     private fun initCounters() {
         this.updateCurrentRoundText()
-        rounds_number?.text = this.roundsNumber.toString()
+        rounds_number?.text = this.quizManager?.getRoundsNumber().toString()
     }
 
-    private fun initRoundsNumber() {
-        this.roundsNumber = DifficultyPreferences(this).roundsNumber()
+    private fun initQuizManager() {
+        this.quizManager = QuizManager(this)
     }
 
     private fun initSuggestionButtons() {
@@ -58,7 +48,7 @@ class QuizActivity : AppCompatActivity() {
     private fun nextRound() {
         this.updateCurrentRoundText()
         this.resetSuggestionButtons()
-        if (this.roundsNumber == this.currentRound)
+        if (true == this.quizManager?.isLastRound())
             ButtonUtils.text(next_button, getString(R.string.result))
         ButtonUtils.invisible(next_button)
     }
@@ -71,9 +61,8 @@ class QuizActivity : AppCompatActivity() {
     private fun revealAnswer() = ButtonUtils.goodAnswer(this.answerButton, this)
 
     private fun setNextButtonClickListener() = next_button?.setOnClickListener {
-        this.currentRound++
-        if (this.roundsNumber < this.currentRound) this.goToResultActivity()
-        else this.nextRound()
+        this.quizManager?.nextRound { this.goToResultActivity() }
+        this.nextRound()
     }
 
     private fun setOnClickListeners() {
@@ -84,7 +73,7 @@ class QuizActivity : AppCompatActivity() {
     private fun setSuggestionButtonsClickListener() = this.suggestionButtons.forEach { suggestion ->
         suggestion?.setOnClickListener { clickedButton ->
             val button = clickedButton as Button
-            this.checkUserAnswer(button)
+            ButtonUtils.focus(button)
             this.revealAnswer()
             ButtonUtils.notClickable(button)
             ButtonUtils.visible(next_button)
@@ -92,6 +81,6 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateCurrentRoundText() {
-        current_round?.text = this.currentRound.toString()
+        current_round?.text = this.quizManager?.getCurrentRound().toString()
     }
 }

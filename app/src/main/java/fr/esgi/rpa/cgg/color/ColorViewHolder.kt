@@ -22,9 +22,9 @@ class ColorViewHolder(inflater: LayoutInflater, parent: ViewGroup, attachToRoot:
     }
 
     fun bind(color: Color) {
-        this.colorName?.text = color.name
-        this.darkColor = color.darkValue
-        this.lightColor = color.lightValue
+        this.colorName?.text = color.name()
+        this.darkColor = color.darkValue()
+        this.lightColor = color.lightValue()
     }
 
     fun setDarkButtonClickListener(clickListener: () -> Unit): Unit? =

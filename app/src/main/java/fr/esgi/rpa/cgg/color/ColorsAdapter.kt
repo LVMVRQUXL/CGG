@@ -35,7 +35,7 @@ class ColorsAdapter(
     }
 
     private fun setClickListeners(holder: ColorViewHolder, color: Color) {
-        holder.setDarkButtonClickListener { this.callButtonClickListener(color.darkValue) }
-        holder.setLightButtonClickListener { this.callButtonClickListener(color.lightValue) }
+        holder.setDarkButtonClickListener { this.callButtonClickListener(color.darkValue()) }
+        holder.setLightButtonClickListener { this.callButtonClickListener(color.lightValue()) }
     }
 }

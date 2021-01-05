@@ -7,7 +7,7 @@ import retrofit2.Response
 
 class GetColorsCallback(
     private val colors: MutableList<Color>,
-    private val notifyAdapter: () -> Unit
+    private val callback: () -> Unit
 ) : Callback<List<Color>> {
     companion object {
         private const val TAG: String = "GetColorsCallback"
@@ -19,6 +19,6 @@ class GetColorsCallback(
 
     override fun onResponse(call: Call<List<Color>>, response: Response<List<Color>>) {
         response.body()?.forEach { color: Color -> this.colors.add(color) }
-        this.notifyAdapter()
+        this.callback()
     }
 }
