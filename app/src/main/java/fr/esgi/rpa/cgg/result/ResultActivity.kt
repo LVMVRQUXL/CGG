@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
-import fr.esgi.rpa.cgg.question.QuestionActivity
+import fr.esgi.rpa.cgg.quiz.QuizActivity
 import kotlinx.android.synthetic.main.activity_result.*
 
 
@@ -29,7 +29,7 @@ class ResultActivity : AppCompatActivity() {
         }
 
         play_button?.setOnClickListener {
-            val intent = Intent(this, QuestionActivity::class.java)
+            val intent = Intent(this, QuizActivity::class.java)
             startActivity(intent)
         }
     }

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import fr.esgi.rpa.cgg.color.ColorsActivity
 import fr.esgi.rpa.cgg.difficulty.DifficultyActivity
-import fr.esgi.rpa.cgg.question.QuestionActivity
+import fr.esgi.rpa.cgg.quiz.QuizActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setPlayButtonClickListener() = play_button?.setOnClickListener {
-        val intent = Intent(this, QuestionActivity::class.java)
+        val intent = Intent(this, QuizActivity::class.java)
         startActivity(intent)
     }
 }

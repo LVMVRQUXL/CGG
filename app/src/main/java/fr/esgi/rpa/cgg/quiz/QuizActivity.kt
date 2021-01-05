@@ -1,4 +1,4 @@
-package fr.esgi.rpa.cgg.question
+package fr.esgi.rpa.cgg.quiz
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,9 @@ import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.difficulty.DifficultyPreferences
 import fr.esgi.rpa.cgg.result.ResultActivity
 import fr.esgi.rpa.cgg.utils.ButtonUtils
-import kotlinx.android.synthetic.main.activity_question.*
+import kotlinx.android.synthetic.main.activity_quiz.*
 
-class QuestionActivity : AppCompatActivity() {
+class QuizActivity : AppCompatActivity() {
     private val suggestionButtons: MutableList<Button?> = mutableListOf()
     private var answerButton: Button? = null
     private var currentRound: Int = 1
@@ -19,7 +19,7 @@ class QuestionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        super.setContentView(R.layout.activity_question)
+        super.setContentView(R.layout.activity_quiz)
         this.initRoundsNumber()
         this.initSuggestionButtons()
         this.initCounters()
