@@ -36,8 +36,11 @@ class QuizActivity : AppCompatActivity() {
     private fun disableSuggestionButtons() =
         this.suggestionButtons.forEach { button: Button? -> ButtonUtils.notClickable(button) }
 
-    private fun goToResultActivity() =
-        super.startActivity(Intent(this, ResultActivity::class.java))
+    private fun goToResultActivity(score: Int, roundsNumber: Int) = super.startActivity(
+        Intent(this, ResultActivity::class.java)
+            .putExtra(ResultActivity.SCORE_KEY, score.toString())
+            .putExtra(ResultActivity.ROUNDS_NUMBER_KEY, roundsNumber.toString())
+    )
 
     private fun initAnswerButton() {
         val answer: SingleColor? = this.quizManager?.getCurrentQuestion()?.getAnswer()
@@ -87,7 +90,9 @@ class QuizActivity : AppCompatActivity() {
     private fun revealAnswer() = ButtonUtils.goodAnswer(this.answerButton, this)
 
     private fun setNextButtonClickListener() = next_button?.setOnClickListener {
-        this.quizManager?.nextRound { this.goToResultActivity() }
+        this.quizManager?.nextRound { score: Int, roundsNumber: Int ->
+            this.goToResultActivity(score, roundsNumber)
+        }
         this.nextRound()
     }
 
@@ -99,6 +104,7 @@ class QuizActivity : AppCompatActivity() {
     private fun setSuggestionButtonsClickListener() = this.suggestionButtons.forEach { b: Button? ->
         b?.setOnClickListener { clickedButton ->
             val button = clickedButton as Button
+            this.quizManager?.checkAnswer(button.text as String)
             ButtonUtils.focus(button)
             this.disableSuggestionButtons()
             this.revealAnswer()

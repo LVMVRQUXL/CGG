@@ -7,16 +7,16 @@ import androidx.core.view.isInvisible
 import fr.esgi.rpa.cgg.R
 
 object ButtonUtils {
+    private const val DARK_BACKGROUND: Int = R.drawable.rounded_corners_primary_dark
     private const val DEFAULT_BACKGROUND: Int = R.drawable.rounded_corners_primary
     private const val FOCUS_BACKGROUND: Int = R.drawable.rounded_corners_complementary
-    private const val GREEN_BACKGROUND: Int = R.drawable.rounded_corners_green
     private const val PRIMARY_COLOR: Int = R.color.primary
     private const val PRIMARY_DARK_COLOR: Int = R.color.primaryDark
 
     fun focus(button: Button?) = button?.setBackgroundResource(FOCUS_BACKGROUND)
 
     fun goodAnswer(button: Button?, context: Context) {
-        button?.setBackgroundResource(GREEN_BACKGROUND)
+        button?.setBackgroundResource(DARK_BACKGROUND)
         this.textColor(button, PRIMARY_COLOR, context)
     }
 

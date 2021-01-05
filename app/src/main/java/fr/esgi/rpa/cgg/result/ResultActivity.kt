@@ -8,29 +8,39 @@ import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.quiz.QuizActivity
 import kotlinx.android.synthetic.main.activity_result.*
 
-
 class ResultActivity : AppCompatActivity() {
-
     companion object {
-        const val SCORE_KEY = "scoreKey"
+        const val ROUNDS_NUMBER_KEY: String = "roundsNumberKey"
+        const val SCORE_KEY: String = "scoreKey"
+        private const val VIEW: Int = R.layout.activity_result
+    }
+
+    override fun onBackPressed() {
+        super.navigateUpTo(Intent(this, MainActivity::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        super.setContentView(VIEW)
+        this.initTextViews()
+        this.setClickListeners()
+    }
 
-        intent?.getStringExtra(SCORE_KEY)?.let {
-            scoreResult?.text = it + "/10"
-        }
+    private fun initTextViews() {
+        score?.text = super.getIntent()?.getStringExtra(SCORE_KEY)
+        rounds_number?.text = super.getIntent()?.getStringExtra(ROUNDS_NUMBER_KEY)
+    }
 
-        back_button?.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+    private fun setBackButtonClickListener() =
+        back_button?.setOnClickListener { this.onBackPressed() }
 
-        play_button?.setOnClickListener {
-            val intent = Intent(this, QuizActivity::class.java)
-            startActivity(intent)
-        }
+    private fun setClickListeners() {
+        this.setBackButtonClickListener()
+        this.setPlayButtonClickListener()
+    }
+
+    private fun setPlayButtonClickListener() = play_button?.setOnClickListener {
+        val intent = Intent(this, QuizActivity::class.java)
+        super.startActivity(intent)
     }
 }

@@ -10,9 +10,14 @@ class QuizManager(private val context: Context, private val callbackUI: () -> Un
     private val roundsNumber: Int = DifficultyPreferences(this.context).roundsNumber()
     private var currentQuestion: Question? = null
     private var currentRound: Int = 0
+    private var score: Int = 0
 
     init {
         this.initRandomColors()
+    }
+
+    fun checkAnswer(answer: String) {
+        if (this.currentQuestion?.getAnswer()?.getName() == answer) this.score++
     }
 
     fun getCurrentQuestion(): Question? = this.currentQuestion
@@ -23,10 +28,11 @@ class QuizManager(private val context: Context, private val callbackUI: () -> Un
 
     fun isLastRound(): Boolean = this.roundsNumber == this.currentRound
 
-    fun nextRound(nextActivity: () -> Unit) = when (this.roundsNumber) {
-        this.currentRound -> nextActivity()
-        else -> this.nextQuestion()
-    }
+    fun nextRound(nextActivity: (score: Int, roundsNumber: Int) -> Unit) =
+        when (this.isLastRound()) {
+            true -> nextActivity(this.score, this.roundsNumber)
+            else -> this.nextQuestion()
+        }
 
     private fun buildQuestion(): Question {
         val suggestionColors = SuggestionColors()
