@@ -32,7 +32,7 @@ class DifficultyActivity : AppCompatActivity() {
     private fun getButtonIdFromPreferences(): Int? = when (this.preferences?.value()) {
         DifficultyPreferences.EASY -> easy_button?.id
         DifficultyPreferences.MEDIUM -> medium_button?.id
-        else -> easy_button?.id
+        else -> hard_button?.id
     }
 
     private fun initButtons() {

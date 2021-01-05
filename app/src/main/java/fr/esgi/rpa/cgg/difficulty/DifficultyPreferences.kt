@@ -2,7 +2,6 @@ package fr.esgi.rpa.cgg.difficulty
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 
 class DifficultyPreferences(private val context: Context) {
     companion object {
@@ -23,6 +22,12 @@ class DifficultyPreferences(private val context: Context) {
 
     fun medium() = this.update(MEDIUM)
 
+    fun roundsNumber(): Int = when (this.value()) {
+        HARD -> 15
+        MEDIUM -> 10
+        else -> 5
+    }
+
     fun value(): String? = this.preferences.getString(DIFFICULTY_KEY, this.difficulties.first())
 
     private fun update(difficulty: String) {
@@ -30,6 +35,5 @@ class DifficultyPreferences(private val context: Context) {
             putString(DIFFICULTY_KEY, difficulty)
             apply()
         }
-        Log.v("DifficultyPreferences", "Current difficulty = $difficulty")
     }
 }
