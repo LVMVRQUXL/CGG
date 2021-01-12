@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/primaryDark">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_full_name"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/top_guideline"
@@ -41,36 +41,79 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/scoreText"
+        android:id="@+id/score_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30sp"
         android:text="@string/scoreText"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/scoreResult"
+        app:layout_constraintBottom_toTopOf="@id/result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_guideline"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/scoreResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/solid_circle_primary"
-        android:gravity="center"
-        android:text="@string/scoreResult"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="36sp"
-        android:textStyle="bold"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/result"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/solid_oval"
         app:layout_constraintBottom_toTopOf="@id/middle_down_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scoreText" />
+        app:layout_constraintTop_toBottomOf="@id/score_text">
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/x"
+            android:textAlignment="center"
+            android:textColor="@color/primaryDark"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/slash"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:gravity="center"
+            android:text="@string/slash"
+            android:textAlignment="center"
+            android:textColor="@color/primaryDark"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rounds_number"
+            app:layout_constraintStart_toEndOf="@id/score"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rounds_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/x"
+            android:textAlignment="center"
+            android:textColor="@color/primaryDark"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/slash"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/play_button"
@@ -79,7 +122,7 @@
         android:layout_marginBottom="20sp"
         android:background="@drawable/rounded_corners_primary"
         android:text="@string/button_play"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +136,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
         android:text="@string/button_home"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
         app:layout_constraintEnd_toEndOf="parent"

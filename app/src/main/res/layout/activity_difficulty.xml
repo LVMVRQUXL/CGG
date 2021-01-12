@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/primaryDark">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
+        android:id="@+id/top_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/middleTopGuideline"
+        android:id="@+id/middle_up_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/middleDownGuideline"
+        android:id="@+id/middle_down_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
+        android:id="@+id/bottom_guideline"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -39,28 +39,27 @@
         android:layout_height="wrap_content"
         android:text="@string/app_full_name"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/topGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/top_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/difficultyText"
+        android:id="@+id/difficulty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30sp"
         android:text="@string/difficultyText"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/middleTopGuideline"
+        app:layout_constraintBottom_toTopOf="@id/medium_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topGuideline" />
+        app:layout_constraintTop_toBottomOf="@id/middle_up_guideline" />
 
     <Button
         android:id="@+id/easy_button"
@@ -68,12 +67,12 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
         android:text="@string/button_easy"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/middleTopGuideline"
+        app:layout_constraintBottom_toTopOf="@id/middle_down_guideline"
         app:layout_constraintEnd_toStartOf="@id/medium_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/difficultyText" />
+        app:layout_constraintTop_toBottomOf="@id/difficulty_text" />
 
     <Button
         android:id="@+id/medium_button"
@@ -81,12 +80,12 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
         android:text="@string/button_medium"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/middleTopGuideline"
+        app:layout_constraintBottom_toTopOf="@id/middle_down_guideline"
         app:layout_constraintEnd_toStartOf="@id/hard_button"
         app:layout_constraintStart_toEndOf="@id/easy_button"
-        app:layout_constraintTop_toBottomOf="@id/difficultyText" />
+        app:layout_constraintTop_toBottomOf="@id/difficulty_text" />
 
     <Button
         android:id="@+id/hard_button"
@@ -94,25 +93,26 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
         android:text="@string/button_hard"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/middleTopGuideline"
+        app:layout_constraintBottom_toTopOf="@id/middle_down_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/medium_button"
-        app:layout_constraintTop_toBottomOf="@id/difficultyText" />
+        app:layout_constraintTop_toBottomOf="@id/difficulty_text" />
 
     <Button
-        android:id="@+id/confirm_button"
+        android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
-        android:text="@string/button_confirm"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/backButton"
+        android:textAllCaps="true"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/middleDownGuideline" />
+        app:layout_constraintTop_toBottomOf="@id/bottom_guideline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

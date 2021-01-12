@@ -5,7 +5,7 @@
     android:id="@+id/colors_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/primaryDark">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_full_name"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/top_guideline"
@@ -52,7 +52,7 @@
         android:background="@drawable/rounded_corners_primary"
         android:text="@string/backButton"
         android:textAllCaps="true"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
