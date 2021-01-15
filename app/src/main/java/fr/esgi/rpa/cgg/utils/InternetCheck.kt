@@ -9,9 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 
-class InternetCheck (private val context: Context ){
+class InternetCheck(private val context: Context) {
 
-    fun showAlert(myApp : AppCompatActivity ) {
+    fun showAlert(myApp: AppCompatActivity) {
         val alertBuilder = AlertDialog.Builder(myApp)
         alertBuilder.setTitle("Our app need Internet")
         alertBuilder.setMessage("Dear customer, you're have no internet connection, please refresh after succesfully connect to internet")

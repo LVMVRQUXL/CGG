@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
+import fr.esgi.rpa.cgg.utils.InternetCheck
 import kotlinx.android.synthetic.main.activity_colors.*
 
 class ColorsActivity : AppCompatActivity() {
@@ -17,10 +18,15 @@ class ColorsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        super.setContentView(R.layout.activity_colors)
-        this.initColors()
-        this.applyRecyclerView()
-        this.setBackButtonClickListener()
+        val connectivity = InternetCheck(this)
+        if (!connectivity.internetWorking()) {
+            connectivity.showAlert(this)
+        } else {
+            super.setContentView(R.layout.activity_colors)
+            this.initColors()
+            this.applyRecyclerView()
+            this.setBackButtonClickListener()
+        }
     }
 
     private fun applyRecyclerView(): RecyclerView? = colors_recycler_view?.apply {

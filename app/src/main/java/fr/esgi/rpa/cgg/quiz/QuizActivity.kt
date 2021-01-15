@@ -9,7 +9,9 @@ import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.color.SingleColor
 import fr.esgi.rpa.cgg.result.ResultActivity
 import fr.esgi.rpa.cgg.utils.ButtonUtils
+import fr.esgi.rpa.cgg.utils.InternetCheck
 import kotlinx.android.synthetic.main.activity_quiz.*
+
 
 class QuizActivity : AppCompatActivity() {
     companion object {
@@ -23,7 +25,12 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.initQuizManager()
+        val connectivity = InternetCheck(this)
+        if (!connectivity.internetWorking()) {
+            connectivity.showAlert(this)
+        } else {
+            this.initQuizManager()
+        }
     }
 
     private fun continueOnCreate() {
