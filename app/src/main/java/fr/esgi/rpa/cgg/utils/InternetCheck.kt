@@ -5,12 +5,25 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
-
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 
 
 class InternetCheck (private val context: Context ){
 
-
+    fun showAlert(myApp : AppCompatActivity ) {
+        val alertBuilder = AlertDialog.Builder(myApp)
+        alertBuilder.setTitle("Our app need Internet")
+        alertBuilder.setMessage("Dear customer, you're have no internet connection, please refresh after succesfully connect to internet")
+        alertBuilder.setPositiveButton("refresh") { dialog, which ->
+            myApp.finish()
+            myApp.startActivity(myApp.intent)
+        }
+        alertBuilder.setNeutralButton("back to menu") { dialog, which ->
+            myApp.onBackPressed()
+        }
+        alertBuilder.show()
+    }
 
     fun internetWorking(): Boolean {
         val connectivityManager =
