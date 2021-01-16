@@ -28,4 +28,8 @@
         Our app needs an Internet connection for displaying this view!
     </string>
     <string name="refresh">refresh</string>
+    <string name="count_scores">X</string>
+    <string name="dash">-</string>
+    <string name="history_scores">History scores</string>
+    <string name="scores_button">SCORES</string>
 </resources>
