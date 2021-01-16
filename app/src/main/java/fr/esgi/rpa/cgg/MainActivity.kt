@@ -2,21 +2,20 @@ package fr.esgi.rpa.cgg
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import fr.esgi.rpa.cgg.color.ColorsActivity
 import fr.esgi.rpa.cgg.difficulty.DifficultyActivity
 import fr.esgi.rpa.cgg.quiz.QuizActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    override fun onBackPressed() {
-        finishAffinity()
-    }
+class MainActivity : BaseActivity() {
+    override fun continueOnCreate() = this.setClickListeners()
+
+    override fun onBackPressed() = finishAffinity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        this.setClickListeners()
+        super.setContentView(R.layout.activity_main)
+        this.continueOnCreate()
     }
 
     private fun setClickListeners() {

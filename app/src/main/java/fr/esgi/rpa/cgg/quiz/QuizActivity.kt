@@ -4,7 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import fr.esgi.rpa.cgg.BaseActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.color.SingleColor
 import fr.esgi.rpa.cgg.result.ResultActivity
@@ -12,8 +12,7 @@ import fr.esgi.rpa.cgg.utils.ButtonUtils
 import fr.esgi.rpa.cgg.utils.InternetCheck
 import kotlinx.android.synthetic.main.activity_quiz.*
 
-
-class QuizActivity : AppCompatActivity() {
+class QuizActivity : BaseActivity() {
     companion object {
         private const val RESULT_STRING: Int = R.string.result
         private const val VIEW: Int = R.layout.activity_quiz
@@ -23,25 +22,23 @@ class QuizActivity : AppCompatActivity() {
     private var answerButton: Button? = null
     private var quizManager: QuizManager? = null
 
+    override fun continueOnCreate() = this.initQuizManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val connectivity = InternetCheck(this)
-        if (!connectivity.internetWorking()) {
-            connectivity.showAlert(this)
-        } else {
-            this.initQuizManager()
-        }
+        if (InternetCheck.internetWorking(this)) this.continueOnCreate()
+        else InternetCheck.showAlert(this)
     }
 
-    private fun continueOnCreate() {
+    private fun disableSuggestionButtons() =
+        this.suggestionButtons.forEach { button: Button? -> ButtonUtils.notClickable(button) }
+
+    private fun finalizeOnCreate() {
         super.setContentView(VIEW)
         this.initButtons()
         this.initCounters()
         this.setOnClickListeners()
     }
-
-    private fun disableSuggestionButtons() =
-        this.suggestionButtons.forEach { button: Button? -> ButtonUtils.notClickable(button) }
 
     private fun goToResultActivity(score: Int, roundsNumber: Int) = super.startActivity(
         Intent(this, ResultActivity::class.java)
@@ -67,7 +64,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun initQuizManager() {
-        this.quizManager = QuizManager(this) { this.continueOnCreate() }
+        this.quizManager = QuizManager(this) { this.finalizeOnCreate() }
     }
 
     private fun initSuggestionButtons() {

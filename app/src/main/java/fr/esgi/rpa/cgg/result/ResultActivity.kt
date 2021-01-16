@@ -1,18 +1,23 @@
 package fr.esgi.rpa.cgg.result
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import fr.esgi.rpa.cgg.BaseActivity
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.quiz.QuizActivity
 import kotlinx.android.synthetic.main.activity_result.*
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : BaseActivity() {
     companion object {
         const val ROUNDS_NUMBER_KEY: String = "roundsNumberKey"
         const val SCORE_KEY: String = "scoreKey"
         private const val VIEW: Int = R.layout.activity_result
+    }
+
+    override fun continueOnCreate() {
+        this.initTextViews()
+        this.setClickListeners()
     }
 
     override fun onBackPressed() {
@@ -22,8 +27,7 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         super.setContentView(VIEW)
-        this.initTextViews()
-        this.setClickListeners()
+        this.continueOnCreate()
     }
 
     private fun initTextViews() {
