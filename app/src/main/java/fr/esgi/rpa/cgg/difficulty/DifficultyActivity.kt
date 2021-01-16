@@ -3,23 +3,27 @@ package fr.esgi.rpa.cgg.difficulty
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import fr.esgi.rpa.cgg.BaseActivity
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.utils.ButtonUtils
 import kotlinx.android.synthetic.main.activity_difficulty.*
 
-class DifficultyActivity : AppCompatActivity() {
+class DifficultyActivity : BaseActivity() {
     private val buttons: MutableList<Button?> = mutableListOf()
     private var preferences: DifficultyPreferences? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        super.setContentView(R.layout.activity_difficulty)
+    override fun continueOnCreate() {
         this.initButtons()
         this.initPreferences()
         this.focusButtonFromPreferences()
         this.setClickListeners()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        super.setContentView(R.layout.activity_difficulty)
+        this.continueOnCreate()
     }
 
     private fun focusButtonFromPreferences() {

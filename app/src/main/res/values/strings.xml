@@ -8,7 +8,7 @@
     <string name="round">Round</string>
     <string name="scoreText">Score</string>
     <string name="button_home">HOME</string>
-    <string name="backButton">back</string>
+    <string name="back">back</string>
     <string name="colorName">color</string>
     <string name="lightColorButton">light</string>
     <string name="darkColorButton">dark</string>
@@ -23,4 +23,9 @@
     <string name="button_medium">MEDIUM</string>
     <string name="button_hard">HARD</string>
     <string name="optionPreference">Option Preferences</string>
+    <string name="internet_alert_title">No Internet connection</string>
+    <string name="internet_alert_msg">
+        Our app needs an Internet connection for displaying this view!
+    </string>
+    <string name="refresh">refresh</string>
 </resources>
