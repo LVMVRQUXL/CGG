@@ -15,14 +15,15 @@ class ScoresCsvManager(private val context: Context) {
 
 
     fun read(): MutableList<Score> {
-        this.exist()
-        fileReader = BufferedReader(FileReader(filePath))
-        val parser = CSVParser(fileReader, CSVFormat.DEFAULT)
-        for (csvRecord in parser) {
-            val id = csvRecord.get(0).trim()
-            val difficulty = csvRecord.get(1).trim()
-            val score = csvRecord.get(2).trim().toInt()
-            this.scores.add(Score(id, difficulty, score))
+        if (this.exist()) {
+            fileReader = BufferedReader(FileReader(filePath))
+            val parser = CSVParser(fileReader, CSVFormat.DEFAULT)
+            for (csvRecord in parser) {
+                val id = csvRecord.get(0).trim()
+                val difficulty = csvRecord.get(1).trim()
+                val score = csvRecord.get(2).trim().toInt()
+                this.scores.add(Score(id, difficulty, score))
+            }
         }
         return this.scores
     }
@@ -40,18 +41,7 @@ class ScoresCsvManager(private val context: Context) {
         writer.close()
     }
 
-    private fun exist() {
-        try {
-            val file = File(filePath)
-            val f = file.exists()
-            if (f) {
-                Log.v("Score", "File exists : $f")
-            }
-        }
-        catch (e: FileNotFoundException) {
-            Log.v("Score", "File exists : ${e.message}")
-        }
-    }
+    private fun exist(): Boolean = File(filePath).exists()
 
 
 }
