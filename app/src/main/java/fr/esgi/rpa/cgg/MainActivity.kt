@@ -5,6 +5,7 @@ import android.os.Bundle
 import fr.esgi.rpa.cgg.color.ColorsActivity
 import fr.esgi.rpa.cgg.difficulty.DifficultyActivity
 import fr.esgi.rpa.cgg.quiz.QuizActivity
+import fr.esgi.rpa.cgg.score.ScoresActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity() {
         this.setPlayButtonClickListener()
         this.setColorsButtonClickListener()
         this.setOptionButtonClickListener()
+        this.setScoresButtonClickListener()
     }
 
     private fun setColorsButtonClickListener() = colors_button?.setOnClickListener {
@@ -32,6 +34,13 @@ class MainActivity : BaseActivity() {
     private fun setOptionButtonClickListener() = options_button?.setOnClickListener {
         val intent = Intent(this, DifficultyActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun setScoresButtonClickListener() {
+        scores_button?.setOnClickListener {
+            val intent = Intent(this, ScoresActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setPlayButtonClickListener() = play_button?.setOnClickListener {

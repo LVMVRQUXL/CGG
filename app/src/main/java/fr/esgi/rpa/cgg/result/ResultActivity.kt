@@ -6,6 +6,8 @@ import fr.esgi.rpa.cgg.BaseActivity
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.quiz.QuizActivity
+import fr.esgi.rpa.cgg.score.Score
+import fr.esgi.rpa.cgg.score.ScoresCsvManager
 import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : BaseActivity() {
@@ -15,8 +17,11 @@ class ResultActivity : BaseActivity() {
         private const val VIEW: Int = R.layout.activity_result
     }
 
+    private var scoresCsvManager: ScoresCsvManager? = null
+
     override fun continueOnCreate() {
         this.initTextViews()
+        this.saveScore("EASY", 5)
         this.setClickListeners()
     }
 
@@ -46,5 +51,10 @@ class ResultActivity : BaseActivity() {
     private fun setPlayButtonClickListener() = play_button?.setOnClickListener {
         val intent = Intent(this, QuizActivity::class.java)
         super.startActivity(intent)
+    }
+
+    private fun saveScore(difficulty: String, score: Int) {
+        this.scoresCsvManager = ScoresCsvManager(this)
+        this.scoresCsvManager?.write(difficulty, score)
     }
 }
