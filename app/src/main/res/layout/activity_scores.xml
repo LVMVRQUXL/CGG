@@ -5,7 +5,7 @@
     android:id="@+id/colors_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/primaryDark">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_full_name"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/top_guideline"
@@ -39,12 +39,12 @@
         android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         app:layout_constraintBottom_toTopOf="@id/scores_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_guideline"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginVertical="10dp">
+        app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
             android:id="@+id/historyText"
@@ -53,12 +53,12 @@
             android:paddingTop="20dp"
             android:text="@string/history_scores"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primary"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/dash"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,7 +70,7 @@
             android:paddingTop="20dp"
             android:text="@string/dash"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primary"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="parent"
@@ -82,10 +82,10 @@
             android:id="@+id/countScores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/count_scores"
             android:paddingTop="20dp"
+            android:text="@string/count_scores"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primary"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="parent"
@@ -103,16 +103,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/history"
-        tools:listitem="@layout/score_item"/>
+        tools:listitem="@layout/score_item" />
 
     <Button
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
-        android:text="@string/backButton"
+        android:text="@string/back"
         android:textAllCaps="true"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/primaryDark"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

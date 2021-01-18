@@ -19,9 +19,9 @@
     <string name="button_options">OPTIONS</string>
     <string name="button_confirm">CONFIRM</string>
     <string name="difficultyText">Select difficulty level</string>
-    <string name="button_easy">EASY</string>
-    <string name="button_medium">MEDIUM</string>
-    <string name="button_hard">HARD</string>
+    <string name="easy">EASY</string>
+    <string name="medium">MEDIUM</string>
+    <string name="hard">HARD</string>
     <string name="optionPreference">Option Preferences</string>
     <string name="internet_alert_title">No Internet connection</string>
     <string name="internet_alert_msg">
