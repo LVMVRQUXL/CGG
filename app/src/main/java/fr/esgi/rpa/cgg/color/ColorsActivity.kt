@@ -2,29 +2,31 @@ package fr.esgi.rpa.cgg.color
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.esgi.rpa.cgg.BaseActivity
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
+import fr.esgi.rpa.cgg.utils.InternetCheck
 import kotlinx.android.synthetic.main.activity_colors.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class ColorsActivity : AppCompatActivity() {
-    private var colors: MutableList<Color> = mutableListOf()
-    private var colorsAdapter: ColorsAdapter =
-        ColorsAdapter(colors) { color: Int -> updateBackgroundWithTimer(color) }
+class ColorsActivity : BaseActivity() {
+    private val colors: MutableList<Color> = mutableListOf()
+    private val colorsAdapter: ColorsAdapter =
+        ColorsAdapter(this.colors) { color: Int -> updateBackgroundWithTimer(color) }
+
+    override fun continueOnCreate() {
+        super.setContentView(R.layout.activity_colors)
+        this.initColors()
+        this.applyRecyclerView()
+        this.setBackButtonClickListener()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_colors)
-        this.initColors()
-        this.applyRecyclerView()
-        this.setClickListeners()
+        if (InternetCheck.internetWorking(this)) this.continueOnCreate()
+        else InternetCheck.showAlert(this)
     }
 
     private fun applyRecyclerView(): RecyclerView? = colors_recycler_view?.apply {
@@ -32,24 +34,16 @@ class ColorsActivity : AppCompatActivity() {
         adapter = colorsAdapter
     }
 
-    private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+    private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.primaryDark)
 
     private fun initColors() {
-        ColorsRepository.getAllColors(object : Callback<List<Color>> {
-            override fun onResponse(call: Call<List<Color>>, response: Response<List<Color>>) {
-                response.body()?.forEach { color: Color -> colors.add(color) }
-                colorsAdapter.notifyDataSetChanged()
-            }
-
-            override fun onFailure(call: Call<List<Color>>, t: Throwable) {
-                Log.e("ColorsActivity", "An error has occurred", t)
-            }
-        })
+        val callback = GetColorsCallback(this.colors) { this.colorsAdapter.notifyDataSetChanged() }
+        ColorsRepository.getColors(callback)
     }
 
-    private fun setClickListeners(): Unit? = back_button?.setOnClickListener {
+    private fun setBackButtonClickListener() = back_button?.setOnClickListener {
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        super.navigateUpTo(intent)
     }
 
     private fun updateBackground(backgroundColor: Int) {

@@ -7,9 +7,8 @@
     <string name="question">What color is this?</string>
     <string name="round">Round</string>
     <string name="scoreText">Score</string>
-    <string name="scoreResult">0/10</string>
     <string name="button_home">HOME</string>
-    <string name="backButton">back</string>
+    <string name="back">back</string>
     <string name="colorName">color</string>
     <string name="lightColorButton">light</string>
     <string name="darkColorButton">dark</string>
@@ -20,8 +19,17 @@
     <string name="button_options">OPTIONS</string>
     <string name="button_confirm">CONFIRM</string>
     <string name="difficultyText">Select difficulty level</string>
-    <string name="button_easy">EASY</string>
-    <string name="button_medium">MEDIUM</string>
-    <string name="button_hard">HARD</string>
+    <string name="easy">EASY</string>
+    <string name="medium">MEDIUM</string>
+    <string name="hard">HARD</string>
     <string name="optionPreference">Option Preferences</string>
+    <string name="internet_alert_title">No Internet connection</string>
+    <string name="internet_alert_msg">
+        Our app needs an Internet connection for displaying this view!
+    </string>
+    <string name="refresh">refresh</string>
+    <string name="count_scores">X</string>
+    <string name="dash">-</string>
+    <string name="history_scores">History scores</string>
+    <string name="scores_button">SCORES</string>
 </resources>

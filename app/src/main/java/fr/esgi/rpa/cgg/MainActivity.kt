@@ -1,54 +1,50 @@
 package fr.esgi.rpa.cgg
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import fr.esgi.rpa.cgg.color.ColorsActivity
-import fr.esgi.rpa.cgg.option.OptionActivity
-import fr.esgi.rpa.cgg.question.QuestionActivity
+import fr.esgi.rpa.cgg.difficulty.DifficultyActivity
+import fr.esgi.rpa.cgg.quiz.QuizActivity
+import fr.esgi.rpa.cgg.score.ScoresActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+    override fun continueOnCreate() = this.setClickListeners()
+
+    override fun onBackPressed() = finishAffinity()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        this.setClickListeners()
-
-        val preferences = initOptionSharedPreferences()
-        val difficultyOption = preferences.getString(OptionActivity.DIFFICULTY_KEY, null)
-        Log.v("MainActivity", "DIFFICULTY_KEY = $difficultyOption")
+        super.setContentView(R.layout.activity_main)
+        this.continueOnCreate()
     }
-
-    private fun initOptionSharedPreferences(): SharedPreferences =
-        getSharedPreferences(getString(R.string.optionPreference), Context.MODE_PRIVATE)
 
     private fun setClickListeners() {
         this.setPlayButtonClickListener()
         this.setColorsButtonClickListener()
         this.setOptionButtonClickListener()
+        this.setScoresButtonClickListener()
     }
 
-    private fun setColorsButtonClickListener() {
-        colors_button?.setOnClickListener {
-            val intent = Intent(this, ColorsActivity::class.java)
+    private fun setColorsButtonClickListener() = colors_button?.setOnClickListener {
+        val intent = Intent(this, ColorsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun setOptionButtonClickListener() = options_button?.setOnClickListener {
+        val intent = Intent(this, DifficultyActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun setScoresButtonClickListener() {
+        scores_button?.setOnClickListener {
+            val intent = Intent(this, ScoresActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun setOptionButtonClickListener() {
-        options_button?.setOnClickListener {
-            val intent = Intent(this, OptionActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun setPlayButtonClickListener() {
-        play_button?.setOnClickListener {
-            val intent = Intent(this, QuestionActivity::class.java)
-            startActivity(intent)
-        }
+    private fun setPlayButtonClickListener() = play_button?.setOnClickListener {
+        val intent = Intent(this, QuizActivity::class.java)
+        startActivity(intent)
     }
 }

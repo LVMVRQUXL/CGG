@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/colors_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryDark">
@@ -11,13 +13,6 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/middle_down_guideline"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_guideline"
@@ -40,107 +35,88 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/score_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30sp"
-        android:text="@string/scoreText"
-        android:textAlignment="center"
-        android:textColor="@color/primary"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/result"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toTopOf="@id/scores_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_guideline"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/result"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:background="@drawable/solid_oval"
-        app:layout_constraintBottom_toTopOf="@id/middle_down_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/score_text">
+        app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
-            android:id="@+id/score"
+            android:id="@+id/historyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/x"
+            android:paddingTop="20dp"
+            android:text="@string/history_scores"
             android:textAlignment="center"
-            android:textColor="@color/primaryDark"
-            android:textSize="32sp"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/slash"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dash"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/slash"
+            android:id="@+id/dash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="4dp"
-            android:gravity="center"
-            android:text="@string/slash"
+            android:layout_marginHorizontal="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/dash"
             android:textAlignment="center"
-            android:textColor="@color/primaryDark"
-            android:textSize="32sp"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/rounds_number"
-            app:layout_constraintStart_toEndOf="@id/score"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/countScores"
+            app:layout_constraintStart_toEndOf="@id/historyText"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/rounds_number"
+            android:id="@+id/countScores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/x"
+            android:paddingTop="20dp"
+            android:text="@string/count_scores"
             android:textAlignment="center"
-            android:textColor="@color/primaryDark"
-            android:textSize="32sp"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/slash"
+            app:layout_constraintStart_toEndOf="@id/dash"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/play_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20sp"
-        android:background="@drawable/rounded_corners_primary"
-        android:text="@string/button_play"
-        android:textColor="@color/primaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/back_button"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/scores_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/middle_down_guideline"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@id/history"
+        tools:listitem="@layout/score_item" />
 
     <Button
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_primary"
-        android:text="@string/button_home"
+        android:text="@string/back"
+        android:textAllCaps="true"
         android:textColor="@color/primaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/play_button" />
+        app:layout_constraintTop_toBottomOf="@id/bottom_guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

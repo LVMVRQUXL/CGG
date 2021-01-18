@@ -18,8 +18,9 @@
         tools:targetApi="n">
         <activity android:name=".color.ColorsActivity" />
         <activity android:name=".result.ResultActivity" />
-        <activity android:name=".question.QuestionActivity" />
-        <activity android:name=".option.OptionActivity" />
+        <activity android:name=".quiz.QuizActivity" />
+        <activity android:name=".difficulty.DifficultyActivity" />
+        <activity android:name=".score.ScoresActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
