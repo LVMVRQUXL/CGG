@@ -20,23 +20,25 @@ class ScoresCsvManager(private val context: Context) {
             val parser = CSVParser(fileReader, CSVFormat.DEFAULT)
             for (csvRecord in parser) {
                 val id = csvRecord.get(0).trim()
-                val difficulty = csvRecord.get(1).trim()
-                val score = csvRecord.get(2).trim().toInt()
-                this.scores.add(Score(id, difficulty, score))
+                val fullScore = csvRecord.get(2).trim().split("/")
+                val score = fullScore[0].toInt()
+                val roundsNumber = fullScore[1].toInt()
+                this.scores.add(Score(id, score, roundsNumber))
             }
         }
         return this.scores
     }
 
-    fun write(difficulty: String, score: Int) {
+    fun write(scoreValue: Int, roundsNumber: Int) {
         val id = this.read().size + 1
         Log.v("Score", "id : $id")
         fileWriter = BufferedWriter(FileWriter(filePath))
         val writer = CSVPrinter(fileWriter, CSVFormat.DEFAULT)
         for (score in this.read()) {
-            writer.printRecord(score.id, score.difficulty, score.value.toString())
+            writer.printRecord(score.id(), score.difficulty(), score.value())
         }
-        writer.printRecord(id.toString(), difficulty, score.toString())
+        val newScore = Score(id.toString(), scoreValue, roundsNumber)
+        writer.printRecord(newScore.id(), newScore.difficulty(), newScore.value())
         writer.flush()
         writer.close()
     }
