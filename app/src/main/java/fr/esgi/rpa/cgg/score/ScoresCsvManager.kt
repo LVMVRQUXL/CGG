@@ -43,6 +43,14 @@ class ScoresCsvManager(private val context: Context) {
         writer.close()
     }
 
+    fun lastScore(): Score? {
+        if (this.exist()) {
+            return this.read().last()
+        } else {
+            return null
+        }
+    }
+
     private fun exist(): Boolean = File(filePath).exists()
 
 

@@ -50,7 +50,6 @@ class ScoresActivity : BaseActivity()  {
 
     private fun updateCountScores() {
         countScores?.text = this.count.toString()
-        Log.v("Score", "Count : ${this.count}")
     }
 
     private fun setBackButtonClickListener() {
