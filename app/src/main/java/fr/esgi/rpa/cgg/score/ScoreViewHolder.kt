@@ -20,9 +20,9 @@ class ScoreViewHolder(inflater: LayoutInflater, parent: ViewGroup, attachToRoot:
     }
 
     fun bind(score: Score) {
-        this.id?.text = score.id
-        this.difficulty?.text = score.difficulty
-        this.score?.text = score.value.toString()
+        this.id?.text = score.id.toString()
+        this.difficulty?.text = score.difficulty()
+        this.score?.text = score.value()
     }
 
 }
