@@ -10,10 +10,7 @@ import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.utils.InternetCheck
 import kotlinx.android.synthetic.main.activity_colors.*
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class ColorsActivity : BaseActivity() {
     companion object {
@@ -44,10 +41,12 @@ class ColorsActivity : BaseActivity() {
     }
 
     private fun getColorsFromApi() = this.coroutineScope.launch(Dispatchers.IO) {
-        val callback = GetColorsCallback(this@ColorsActivity.colors) {
-            this@ColorsActivity.colorsAdapter.notifyDataSetChanged()
+        if (this.isActive) {
+            val callback = GetColorsCallback(this@ColorsActivity.colors) {
+                this@ColorsActivity.colorsAdapter.notifyDataSetChanged()
+            }
+            ColorsRepository.getColors(callback)
         }
-        ColorsRepository.getColors(callback)
     }
 
     private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.primaryDark)

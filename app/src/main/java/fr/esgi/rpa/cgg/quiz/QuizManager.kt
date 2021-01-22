@@ -3,10 +3,7 @@ package fr.esgi.rpa.cgg.quiz
 import android.content.Context
 import fr.esgi.rpa.cgg.color.*
 import fr.esgi.rpa.cgg.difficulty.DifficultyPreferences
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class QuizManager(private val context: Context, private val callbackView: () -> Unit) {
     companion object {
@@ -61,9 +58,11 @@ class QuizManager(private val context: Context, private val callbackView: () -> 
     }
 
     private fun getColorsFromApi() = this.coroutineScope.launch(Dispatchers.IO) {
-        val colors: MutableList<Color> = mutableListOf()
-        val callback = GetColorsCallback(colors) { this@QuizManager.continueInit(colors) }
-        ColorsRepository.getColors(callback)
+        if (this.isActive) {
+            val colors: MutableList<Color> = mutableListOf()
+            val callback = GetColorsCallback(colors) { this@QuizManager.continueInit(colors) }
+            ColorsRepository.getColors(callback)
+        }
     }
 
     private fun initQuestions() {
