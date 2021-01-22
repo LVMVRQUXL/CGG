@@ -2,55 +2,62 @@ package fr.esgi.rpa.cgg.score
 
 import android.content.Context
 import android.util.Log
-import org.apache.commons.csv.*
+import org.apache.commons.csv.CSVFormat
+import org.apache.commons.csv.CSVParser
+import org.apache.commons.csv.CSVPrinter
+import org.apache.commons.csv.CSVRecord
 import java.io.*
 
 class ScoresCsvManager(private val context: Context) {
+    companion object {
+        private const val FILE_NAME: String = "data.csv"
+        private const val TAG: String = "ScoresCsvManager"
+    }
 
-    private val fileName = "data.csv"
-    private val filePath = context.filesDir.path + "/" + fileName
-    private var fileReader: BufferedReader? = null
-    private var fileWriter: BufferedWriter? = null
-    private val scores: MutableList<Score> = mutableListOf()
+    private val filePath = "${this.context.filesDir.path}/$FILE_NAME"
+    private var writer: BufferedWriter? = null
+    private var reader: BufferedReader? = null
 
+    fun lastScore(): Score? = try {
+        this.read().last()
+    } catch (exception: NoSuchElementException) {
+        Log.i(TAG, "No score is available!", exception)
+        null
+    }
 
-    fun read(): MutableList<Score> {
+    fun read(): List<Score> {
+        val scores: MutableList<Score> = mutableListOf()
         if (this.exist()) {
-            this.fileReader = BufferedReader(FileReader(this.filePath))
-            val parser = CSVParser(this.fileReader, CSVFormat.DEFAULT)
-            for (csvRecord in parser) {
-                val id = csvRecord.get(0).trim()
-                val fullScore = csvRecord.get(2).trim().split("/")
-                val score = fullScore[0].toInt()
-                val roundsNumber = fullScore[1].toInt()
-                this.scores.add(Score(id, score, roundsNumber))
+            val fileReader = FileReader(this.filePath)
+            this.reader = BufferedReader(fileReader)
+            val parser = CSVParser(this.reader, CSVFormat.DEFAULT)
+            parser.forEach { csvRecord: CSVRecord? ->
+                csvRecord?.let { record: CSVRecord ->
+                    val id = record.get(0).trim().toInt()
+                    val fullScore = record.get(2).trim().split("/")
+                    val score = fullScore[0].toInt()
+                    val roundsNumber = fullScore[1].toInt()
+                    scores.add(Score(id, score, roundsNumber))
+                }
             }
         }
-        return this.scores
+        return scores
     }
 
     fun write(scoreValue: Int, roundsNumber: Int) {
-        val id = this.read().size + 1
-        this.fileWriter = BufferedWriter(FileWriter(this.filePath))
-        val writer = CSVPrinter(this.fileWriter, CSVFormat.DEFAULT)
-        for (score in this.read()) {
-            writer.printRecord(score.id(), score.difficulty(), score.value())
+        val scores: MutableList<Score> = this.read() as MutableList<Score>
+        val id: Int = scores.size + 1
+        val newScore = Score(id, scoreValue, roundsNumber)
+        scores.add(newScore)
+        val fileWriter = FileWriter(this.filePath)
+        this.writer = BufferedWriter(fileWriter)
+        val writer = CSVPrinter(this.writer, CSVFormat.DEFAULT)
+        scores.forEach { score: Score ->
+            writer.printRecord(score.id, score.difficulty(), score.value())
         }
-        val newScore = Score(id.toString(), scoreValue, roundsNumber)
-        writer.printRecord(newScore.id(), newScore.difficulty(), newScore.value())
         writer.flush()
         writer.close()
     }
 
-    fun lastScore(): Score? {
-        return if (this.exist()) {
-            this.read().last()
-        } else {
-            null
-        }
-    }
-
     private fun exist(): Boolean = File(this.filePath).exists()
-
-
 }
