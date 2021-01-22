@@ -57,7 +57,7 @@ class MainActivity : BaseActivity() {
         val scoresCsvManager = ScoresCsvManager(this)
         val lastScore = scoresCsvManager.lastScore()
         if (lastScore != null) {
-            lastScoreText?.text = "Last score :"
+            lastScoreText?.text = getString(R.string.lastscoreText)
             lastScoreValue?.text = lastScore.value()
         }
 

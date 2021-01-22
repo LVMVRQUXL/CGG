@@ -16,8 +16,8 @@ class ScoresCsvManager(private val context: Context) {
 
     fun read(): MutableList<Score> {
         if (this.exist()) {
-            fileReader = BufferedReader(FileReader(filePath))
-            val parser = CSVParser(fileReader, CSVFormat.DEFAULT)
+            this.fileReader = BufferedReader(FileReader(this.filePath))
+            val parser = CSVParser(this.fileReader, CSVFormat.DEFAULT)
             for (csvRecord in parser) {
                 val id = csvRecord.get(0).trim()
                 val fullScore = csvRecord.get(2).trim().split("/")
@@ -31,9 +31,8 @@ class ScoresCsvManager(private val context: Context) {
 
     fun write(scoreValue: Int, roundsNumber: Int) {
         val id = this.read().size + 1
-        Log.v("Score", "id : $id")
-        fileWriter = BufferedWriter(FileWriter(filePath))
-        val writer = CSVPrinter(fileWriter, CSVFormat.DEFAULT)
+        this.fileWriter = BufferedWriter(FileWriter(this.filePath))
+        val writer = CSVPrinter(this.fileWriter, CSVFormat.DEFAULT)
         for (score in this.read()) {
             writer.printRecord(score.id(), score.difficulty(), score.value())
         }
@@ -44,14 +43,14 @@ class ScoresCsvManager(private val context: Context) {
     }
 
     fun lastScore(): Score? {
-        if (this.exist()) {
-            return this.read().last()
+        return if (this.exist()) {
+            this.read().last()
         } else {
-            return null
+            null
         }
     }
 
-    private fun exist(): Boolean = File(filePath).exists()
+    private fun exist(): Boolean = File(this.filePath).exists()
 
 
 }

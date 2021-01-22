@@ -11,9 +11,9 @@ import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import kotlinx.android.synthetic.main.activity_scores.*
 
-class ScoresActivity : BaseActivity()  {
+class ScoresActivity : BaseActivity() {
 
-    private var scores : MutableList<Score> = mutableListOf()
+    private var scores: MutableList<Score> = mutableListOf()
     private val scoresAdapter: ScoresAdapter = ScoresAdapter(this.scores)
     private var scoresCsvManager: ScoresCsvManager? = null
     private var count = 0
@@ -32,7 +32,7 @@ class ScoresActivity : BaseActivity()  {
         this.continueOnCreate()
     }
 
-    private fun applyRecyclerView() : RecyclerView? = scores_recycler_view?.apply {
+    private fun applyRecyclerView(): RecyclerView? = scores_recycler_view?.apply {
         layoutManager = LinearLayoutManager(this@ScoresActivity)
         adapter = scoresAdapter
     }

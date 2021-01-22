@@ -16,8 +16,8 @@ class ResultActivity : BaseActivity() {
         private const val VIEW: Int = R.layout.activity_result
     }
 
-    private var scoreValue: String? = ""
-    private var roundsNumber: String? = ""
+    private var scoreValue: String? = null
+    private var roundsNumber: String? = null
     private var scoresCsvManager: ScoresCsvManager? = null
 
     override fun continueOnCreate() {
