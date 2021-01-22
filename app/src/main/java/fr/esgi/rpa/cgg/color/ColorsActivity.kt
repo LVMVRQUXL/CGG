@@ -10,15 +10,24 @@ import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.utils.InternetCheck
 import kotlinx.android.synthetic.main.activity_colors.*
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ColorsActivity : BaseActivity() {
+    companion object {
+        private const val SCOPE_NAME: String = "ColorsActivity"
+    }
+
     private val colors: MutableList<Color> = mutableListOf()
     private val colorsAdapter: ColorsAdapter =
         ColorsAdapter(this.colors) { color: Int -> updateBackgroundWithTimer(color) }
+    private val coroutineScope: CoroutineScope = CoroutineScope(CoroutineName(SCOPE_NAME))
 
     override fun continueOnCreate() {
         super.setContentView(R.layout.activity_colors)
-        this.initColors()
+        this.getColorsFromApi()
         this.applyRecyclerView()
         this.setBackButtonClickListener()
     }
@@ -34,12 +43,14 @@ class ColorsActivity : BaseActivity() {
         adapter = colorsAdapter
     }
 
-    private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.primaryDark)
-
-    private fun initColors() {
-        val callback = GetColorsCallback(this.colors) { this.colorsAdapter.notifyDataSetChanged() }
+    private fun getColorsFromApi() = this.coroutineScope.launch(Dispatchers.IO) {
+        val callback = GetColorsCallback(this@ColorsActivity.colors) {
+            this@ColorsActivity.colorsAdapter.notifyDataSetChanged()
+        }
         ColorsRepository.getColors(callback)
     }
+
+    private fun getDefaultBackground(): Int = ContextCompat.getColor(this, R.color.primaryDark)
 
     private fun setBackButtonClickListener() = back_button?.setOnClickListener {
         val intent = Intent(this, MainActivity::class.java)
