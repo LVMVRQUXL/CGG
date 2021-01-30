@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import fr.esgi.rpa.cgg.BaseActivity
+import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.color.SingleColor
 import fr.esgi.rpa.cgg.result.ResultActivity
@@ -23,6 +24,11 @@ class QuizActivity : BaseActivity() {
     private var quizManager: QuizManager? = null
 
     override fun continueOnCreate() = this.initQuizManager()
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        navigateUpTo(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
