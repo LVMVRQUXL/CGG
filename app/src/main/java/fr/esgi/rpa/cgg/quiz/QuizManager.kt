@@ -3,8 +3,14 @@ package fr.esgi.rpa.cgg.quiz
 import android.content.Context
 import fr.esgi.rpa.cgg.color.*
 import fr.esgi.rpa.cgg.difficulty.DifficultyPreferences
+import kotlinx.coroutines.*
 
-class QuizManager(private val context: Context, private val callbackUI: () -> Unit) {
+class QuizManager(private val context: Context, private val callbackView: () -> Unit) {
+    companion object {
+        private const val SCOPE_NAME: String = "QuizManager"
+    }
+
+    private val coroutineScope: CoroutineScope = CoroutineScope(CoroutineName(SCOPE_NAME))
     private val questions: MutableList<Question> = mutableListOf()
     private val randomColors: MutableList<SingleColor> = mutableListOf()
     private val roundsNumber: Int = DifficultyPreferences(this.context).roundsNumber()
@@ -13,7 +19,7 @@ class QuizManager(private val context: Context, private val callbackUI: () -> Un
     private var score: Int = 0
 
     init {
-        this.initRandomColors()
+        this.getColorsFromApi()
     }
 
     fun checkAnswer(answer: String) {
@@ -48,7 +54,15 @@ class QuizManager(private val context: Context, private val callbackUI: () -> Un
         this.pickRandomColors(colors)
         this.initQuestions()
         this.nextQuestion()
-        this.callbackUI()
+        this.callbackView()
+    }
+
+    private fun getColorsFromApi() = this.coroutineScope.launch(Dispatchers.IO) {
+        if (this.isActive) {
+            val colors: MutableList<Color> = mutableListOf()
+            val callback = GetColorsCallback(colors) { this@QuizManager.continueInit(colors) }
+            ColorsRepository.getColors(callback)
+        }
     }
 
     private fun initQuestions() {
@@ -56,12 +70,6 @@ class QuizManager(private val context: Context, private val callbackUI: () -> Un
             val question = this.buildQuestion()
             if (!this.questions.contains(question)) this.questions.add(question)
         }
-    }
-
-    private fun initRandomColors() {
-        val colors: MutableList<Color> = mutableListOf()
-        val callback = GetColorsCallback(colors) { this.continueInit(colors) }
-        ColorsRepository.getColors(callback)
     }
 
     private fun nextQuestion() {

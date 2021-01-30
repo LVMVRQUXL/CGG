@@ -6,7 +6,6 @@ import fr.esgi.rpa.cgg.BaseActivity
 import fr.esgi.rpa.cgg.MainActivity
 import fr.esgi.rpa.cgg.R
 import fr.esgi.rpa.cgg.quiz.QuizActivity
-import fr.esgi.rpa.cgg.score.Score
 import fr.esgi.rpa.cgg.score.ScoresCsvManager
 import kotlinx.android.synthetic.main.activity_result.*
 
@@ -17,11 +16,14 @@ class ResultActivity : BaseActivity() {
         private const val VIEW: Int = R.layout.activity_result
     }
 
+    private var scoreValue: String? = null
+    private var roundsNumber: String? = null
     private var scoresCsvManager: ScoresCsvManager? = null
 
     override fun continueOnCreate() {
+        this.initValues()
         this.initTextViews()
-        this.saveScore("EASY", 5)
+        this.saveScore()
         this.setClickListeners()
     }
 
@@ -35,9 +37,14 @@ class ResultActivity : BaseActivity() {
         this.continueOnCreate()
     }
 
+    private fun initValues() {
+        this.scoreValue = super.getIntent()?.getStringExtra(SCORE_KEY)
+        this.roundsNumber = super.getIntent()?.getStringExtra(ROUNDS_NUMBER_KEY)
+    }
+
     private fun initTextViews() {
-        score?.text = super.getIntent()?.getStringExtra(SCORE_KEY)
-        rounds_number?.text = super.getIntent()?.getStringExtra(ROUNDS_NUMBER_KEY)
+        score?.text = this.scoreValue
+        rounds_number?.text = this.roundsNumber
     }
 
     private fun setBackButtonClickListener() =
@@ -53,8 +60,12 @@ class ResultActivity : BaseActivity() {
         super.startActivity(intent)
     }
 
-    private fun saveScore(difficulty: String, score: Int) {
+    private fun saveScore() {
+        val value = this.scoreValue?.toInt()
+        val rounds = this.roundsNumber?.toInt()
         this.scoresCsvManager = ScoresCsvManager(this)
-        this.scoresCsvManager?.write(difficulty, score)
+        if (value != null && rounds != null) {
+            this.scoresCsvManager?.write(value, rounds)
+        }
     }
 }

@@ -6,10 +6,15 @@ import fr.esgi.rpa.cgg.color.ColorsActivity
 import fr.esgi.rpa.cgg.difficulty.DifficultyActivity
 import fr.esgi.rpa.cgg.quiz.QuizActivity
 import fr.esgi.rpa.cgg.score.ScoresActivity
+import fr.esgi.rpa.cgg.score.ScoresCsvManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
-    override fun continueOnCreate() = this.setClickListeners()
+
+    override fun continueOnCreate() {
+        this.setClickListeners()
+        this.setLastScore()
+    }
 
     override fun onBackPressed() = finishAffinity()
 
@@ -46,5 +51,15 @@ class MainActivity : BaseActivity() {
     private fun setPlayButtonClickListener() = play_button?.setOnClickListener {
         val intent = Intent(this, QuizActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun setLastScore() {
+        val scoresCsvManager = ScoresCsvManager(this)
+        val lastScore = scoresCsvManager.lastScore()
+        if (lastScore != null) {
+            lastScoreText?.text = getString(R.string.lastscoreText)
+            lastScoreValue?.text = lastScore.value()
+        }
+
     }
 }
